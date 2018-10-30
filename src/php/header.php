@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
-<head>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title><?php wp_title( '|', true, 'right' ); ?><?php bloginfo( 'name' ); ?></title>
+<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>">
+<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
 <style>@@include('temp/css/theme.min.css')</style>
 <?php get_template_part( 'header-seo' ); ?>
 <?php get_template_part( 'ogp-facebook' ); ?>
@@ -38,6 +39,7 @@ ga('send', 'pageview');
           <p class="site-title__text"><a href="<?php echo home_url(); ?>"><?php bloginfo( 'name' ); ?></a></p>
           <?php endif; ?>
         </div>
+        <?php if( has_nav_menu('global') ) : ?>
         <div class="global-nav-wrap">
           <?php 
             wp_nav_menu( array(
@@ -45,9 +47,21 @@ ga('send', 'pageview');
               'menu_class'      => 'global-nav__list',
               'container'      => 'nav',
               'container_class'=> 'global-nav',
-              'depth'          => 1,
+              'depth'          => 2,
             ) );
-           ?>
+          ?>
+        </div>
+        <div class="hamburger" id="js-toggle-button">
+          <span class="hamburger__line hamburger__line--1"></span>
+          <span class="hamburger__line hamburger__line--2"></span>
+          <span class="hamburger__line hamburger__line--3"></span>
+        </div>
+        <div class="black-bg"></div>
+        <?php endif; ?>
+        <div class="header-search">
+          <div class="header-search__icon">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </div>
         </div>
       </div>
     </header><!-- /header -->

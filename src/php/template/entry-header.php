@@ -15,9 +15,16 @@
     </div>
   <?php endif; ?>
   <?php 
-    $thumbs_array = cb_get_thumbnail_by_id($post->ID); // defined functions.php
+    //記事上アドセンス
+    if ( is_active_sidebar( 'adsence-top' ) ) { 
+      $post_id = get_the_ID();
+      $hide_ad_value = get_post_meta( $post_id,'no_ad', true );
+      if( $hide_ad_value !== 'is-off' ){
+        dynamic_sidebar( 'adsence-top' );
+      }
+    }
   ?>
-  <?php if( $thumbs_array ): ?>
-    <div class="entry-eyecache"><img src="<?php echo $thumbs_array[0]; ?>" srcset="<?php echo $thumbs_array[0]; ?> 1x,<?php echo $thumbs_array[1]; ?> 2x" alt="<?php the_title(); ?>"></div>
-  <?php endif; ?>
+  <div class="share-area share-area__top">
+    <?php get_template_part( 'template/share-buttons' ); ?>
+  </div>
 </header>
